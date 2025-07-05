@@ -166,3 +166,17 @@ function prevQuestion() {
     showQuestion(currentQuestion);
     }
 }
+
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const selected = document.querySelector('input[name="answer"]:checked');
+    if (!selected) {
+        alert("Please select an answer.");
+        return;
+    }
+    answers[currentQuestion] = parseInt(selected.value);
+    console.log("Submitted Answers:", answers);
+    alert("Form submitted! Data logged in console.");
+});
+
+showQuestion(currentQuestion);
