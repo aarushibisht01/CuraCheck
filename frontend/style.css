@@ -114,3 +114,34 @@ button:hover{
     margin-bottom: 10px;
     color: #00796b;
 }
+
+.footer {
+    background-color: #00796b;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex-direction: column;
+    }
+
+    .card img, .card-text {
+        width: 100%;
+    }
+
+    .section-1 h1 {
+        font-size: 2.5rem;
+    }
+
+    .section-1 p {
+        font-size: 1.1rem;
+    }
+}
