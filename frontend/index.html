@@ -13,6 +13,23 @@
             <p>Your smart health companion for early diagnosis</p>
         </div>
     </section>
-
+    <section class="form-section">
+        <div class="container">
+            <h2>Symtom Checker</h2>
+            <p id="question"></p>
+            <form id="healthForm">
+                <div class="radio-buttons">
+                    <label><input type="radio" name="answer" value="1"/>Yes</label>
+                    <label><input type="radio" name="answer" value="0" /> No</label>
+                </div>
+                <div class="buttons">
+                    <button type="button" onclick="prevQuestion()">Previous</button>
+                    <button type="button" onclick="nextQuestion()">Next</button>
+                    <button type="submit" id="submitBtn" style="display:none;">Submit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
 </body>
 </html>
