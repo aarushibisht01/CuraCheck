@@ -74,3 +74,43 @@ button:hover{
     gap: 8px;
     font-weight: 500;
 }
+.cards-section {
+    padding: 60px 20px;
+    background: #fff;
+    text-align: center;
+}
+
+.cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    max-width: 100%;
+    background: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 50%;
+    object-fit: cover;
+    height: auto;
+}
+
+.card-text {
+    padding: 20px;
+    width: 50%;
+    text-align: left;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #00796b;
+}
