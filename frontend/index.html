@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- Navbar -->
   <header>
     <nav class="navbar">
       <div class="logo">CuraCheck</div>
@@ -20,35 +19,40 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
+
   <section class="hero-section" id="home">
     <div class="overlay">
       <h1>CuraCheck</h1>
       <p>Your smart health companion for early diagnosis</p>
-      <a href="#checker" class="hero-btn">Start Diagnosis</a>
+      <a href="#checker" class="hero-btn" onclick="smoothScrollToChecker()">Start Diagnosis</a>
     </div>
   </section>
+ 
+ <section class="form-section" id="checker">
+  <div class="container form-card">
+    <h2>🩺 Symptom Checker</h2>
+    <p id="question" class="question-text">Do you have a fever?</p>
+    <form id="healthForm">
+<div class="radio-buttons-vertical">
+  <label class="radio-option-vertical">
+    <input type="radio" name="answer" value="1" />
+    <span>Yes</span>
+  </label>
+  <label class="radio-option-vertical">
+    <input type="radio" name="answer" value="0" checked />
+    <span>No</span>
+  </label>
+</div>
 
-  <!-- Symptom Checker Section -->
-  <section class="form-section" id="checker">
-    <div class="container">
-      <h2>Symptom Checker</h2>
-      <p id="question">Do you have a fever?</p>
-      <form id="healthForm">
-        <div class="radio-buttons">
-          <label><input type="radio" name="answer" value="1" />Yes</label>
-          <label><input type="radio" name="answer" value="0" />No</label>
-        </div>
-        <div class="buttons">
-          <button type="button" onclick="prevQuestion()">Previous</button>
-                    <button type="button" onclick="nextQuestion()">Next</button>
-                    <button type="submit" id="submitBtn" style="display:none;">Submit</button>
-             </div>
-      </form>
-    </div>
-  </section>
+      <div class="buttons">
+        <button type="button" onclick="prevQuestion()">⏮ Previous</button>
+        <button type="button" onclick="nextQuestion()">Next ⏭</button>
+        <button type="submit" id="submitBtn" style="display:none;">✅ Submit</button>
+      </div>
+    </form>
+  </div>
+</section>
 
-  <!-- Health Tips Section -->
   <section class="cards-section" id="tips">
     <h2>Healthy Living Tips</h2>
     <div class="cards-wrapper">
@@ -69,7 +73,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer" id="footer">
     <div class="footer-content">
       <p>&copy; 2025 CuraCheck. All rights reserved.</p>

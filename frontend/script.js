@@ -142,9 +142,17 @@ const submitBtn = document.getElementById("submitBtn");
 
 function showQuestion(index) {
     questionText.textContent = questions[index];
-    document.querySelectorAll('input[name="answer"]').forEach(input => input.checked = false);
+
+    
+    const inputs = document.querySelectorAll('input[name="answer"]');
+    inputs.forEach(input => {
+        input.checked = false;
+    });
+
+    
     submitBtn.style.display = index === questions.length - 1 ? "inline-block" : "none";
 }
+
 showQuestion(currentQuestion);
 
 function nextQuestion() {
@@ -178,5 +186,9 @@ form.addEventListener("submit", function (e) {
     console.log("Submitted Answers:", answers);
     alert("Form submitted! Data logged in console.");
 });
+function smoothScrollToChecker() {
+  const section = document.getElementById("checker");
+  section.scrollIntoView({ behavior: "smooth" });
+}
 
 showQuestion(currentQuestion);
