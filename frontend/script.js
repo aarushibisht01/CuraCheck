@@ -146,3 +146,23 @@ function showQuestion(index) {
     submitBtn.style.display = index === questions.length - 1 ? "inline-block" : "none";
 }
 showQuestion(currentQuestion);
+
+function nextQuestion() {
+    const selected = document.querySelector('input[name="answer"]:checked');
+    if (!selected) {
+    alert("Please select an answer.");
+    return;
+    }
+    answers[currentQuestion] = parseInt(selected.value);
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+    showQuestion(currentQuestion);
+    }
+}
+
+function prevQuestion() {
+    if (currentQuestion > 0) {
+    currentQuestion--;
+    showQuestion(currentQuestion);
+    }
+}
