@@ -32,3 +32,23 @@ disease_dataset_training = pd.read_csv('./Training.csv')
 disease_dataset_training.head()
 
 train_data = disease_dataset_training.drop(['Unnamed:123'], axis=1)
+train_data.isnull().sum()
+
+# copy to see corelations
+copy = train_data.copy()
+copy = copy.drop(['prognosis'], axis=1)
+
+#correlation check
+# plt.style.use('fivethirtyeight')
+# plt.figure(figsize=(150,150))
+# sns.heatmap(copy.corr(), annot=True, fmt=".2f", cmap='viridis')
+# plt.show()
+
+x_train = train_data.drop(['prognosis'], axis = 1)
+y_train = train_data['prognosis']
+
+x_train = train_data.drop(['prognosis'], axis=1)
+y_train = train_data['prognosis']
+
+scale = MinMaxScaler()
+scale.fit(x_train)
