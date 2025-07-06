@@ -184,9 +184,123 @@ form.addEventListener("submit", function (e) {
         return;
     }
     answers[currentQuestion] = parseInt(selected.value);
+    
+    // Ensure we have answers for all questions
+    if (answers.length !== questions.length) {
+        alert("Please answer all questions before submitting.");
+        return;
+    }
+    
     console.log("Submitted Answers:", answers);
-    alert("Form submitted! Data logged in console.");
+    
+    // Send data to backend API
+    submitToBackend(answers);
 });
+
+async function submitToBackend(symptomsArray) {
+    try {
+        // Show loading state
+        submitBtn.textContent = "Analyzing...";
+        submitBtn.disabled = true;
+        
+        const response = await fetch('/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                symptoms: symptomsArray
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            // Success - show result
+            showResult(result);
+        } else {
+            // Error from backend
+            alert(`Error: ${result.error}`);
+            console.error('Backend error:', result);
+        }
+        
+    } catch (error) {
+        // Network or other error
+        console.error('Network error:', error);
+        alert('Unable to connect to the diagnosis service. Please make sure the backend server is running.');
+    } finally {
+        // Reset button
+        submitBtn.textContent = "✅ Submit";
+        submitBtn.disabled = false;
+    }
+}
+
+function showResult(result) {
+    // Create result display
+    const resultHTML = `
+        <div class="result-container">
+            <h3>🩺 Diagnosis Result</h3>
+            <div class="result-content">
+                <p><strong>Predicted Condition:</strong> ${result.prediction}</p>
+                <p><strong>Symptoms Present:</strong> ${result.symptoms_present} out of ${result.total_symptoms}</p>
+                ${result.confidence ? `<p><strong>Confidence:</strong> ${(result.confidence * 100).toFixed(1)}%</p>` : ''}
+            </div>
+            <div class="result-actions">
+                <button onclick="resetForm()" class="nav-btn">🔄 Start New Diagnosis</button>
+                <button onclick="showHealthTips()" class="nav-btn">💡 View Health Tips</button>
+            </div>
+            <div class="disclaimer">
+                <p><small>⚠️ <strong>Disclaimer:</strong> This is an AI-based prediction for informational purposes only. Please consult a healthcare professional for proper medical diagnosis and treatment.</small></p>
+            </div>
+        </div>
+    `;
+    
+    // Replace form with result
+    const formSection = document.querySelector('.form-card');
+    formSection.innerHTML = resultHTML;
+}
+
+function resetForm() {
+    // Reset all variables
+    currentQuestion = 0;
+    answers.length = 0;
+    
+    // Restore original form
+    const formSection = document.querySelector('.form-card');
+    formSection.innerHTML = `
+        <h2>🩺 Symptom Checker</h2>
+        <p id="question" class="question-text">Do you have a fever?</p>
+        <form id="healthForm">
+            <div class="radio-buttons-vertical">
+                <label class="radio-option-vertical">
+                    <input type="radio" name="answer" value="1" />
+                    <span>Yes</span>
+                </label>
+                <label class="radio-option-vertical">
+                    <input type="radio" name="answer" value="0" checked />
+                    <span>No</span>
+                </label>
+            </div>
+            <div class="buttons">
+                <button type="button" class="nav-btn" onclick="prevQuestion()">⏮ Previous</button>
+                <button type="button" class="nav-btn" onclick="nextQuestion()">Next ⏭</button>
+                <button type="submit" id="submitBtn" style="display:none;">✅ Submit</button>
+            </div>
+        </form>
+    `;
+    
+    // Re-attach event listener
+    const form = document.getElementById("healthForm");
+    form.addEventListener("submit", arguments.callee);
+    
+    // Show first question
+    showQuestion(0);
+}
+
+function showHealthTips() {
+    // Scroll to health tips section
+    delayedScrollTo('tips');
+}
 
 function smoothScrollToTarget(targetId) {
 
