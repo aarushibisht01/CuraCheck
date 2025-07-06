@@ -14,6 +14,20 @@ warnings.filterwarnings('ignore')
 app = Flask(__name__, 
            template_folder='../frontend',
            static_folder='../frontend')
+
+# Alternative path setup for different deployment environments
+import sys
+import os
+
+# Add current directory to path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+frontend_dir = os.path.join(parent_dir, 'frontend')
+
+# Update template and static folders
+app.template_folder = frontend_dir
+app.static_folder = frontend_dir
+
 CORS(app)  # Enable CORS for frontend communication
 
 # Global variables to store the trained model and feature names
@@ -291,6 +305,26 @@ if __name__ == '__main__':
     if load_and_train_model():
         print("✅ Model loaded successfully!")
         print("🚀 Starting Flask server...")
-        app.run(debug=True, host='0.0.0.0', port=5000)
+        
+        # Use environment variable for port (Render requirement)
+        import os
+        port = int(os.environ.get('PORT', 5000))
+        
+        app.run(debug=False, host='0.0.0.0', port=port)
     else:
         print("❌ Failed to load model. Please check your data files.")
+
+# For Vercel serverless deployment
+def handler(event, context):
+    """Vercel serverless function handler"""
+    # Load model if not already loaded
+    if model_knn is None:
+        load_and_train_model()
+    
+    # Return the Flask app for serverless execution
+    return app
+
+# Initialize model for serverless environment
+if not __name__ == '__main__':
+    # This runs when imported as a module (Vercel)
+    load_and_train_model()
