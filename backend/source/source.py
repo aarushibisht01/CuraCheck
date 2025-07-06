@@ -1,4 +1,3 @@
-
 # importing libraries 
 
 import numpy as np
@@ -20,14 +19,14 @@ import warnings
 warnings.filterwarnings('ignore')
 
 #checking versions
-print("np ", np.__version__)
-print("pd ", pd.__version__)
-print("matplotlib ", plt.matplotlib.__version__)
-import sklearn
-print("sklearn ", sklearn.__version__)
-print("seaborn ", sns.__version__)
-import mlxtend
-print("mlxtend ", mlxtend.__version__)
+# print("np ", np.__version__)
+# print("pd ", pd.__version__)
+# print("matplotlib ", plt.matplotlib.__version__)
+# import sklearn
+# print("sklearn ", sklearn.__version__)
+# print("seaborn ", sns.__version__)
+# import mlxtend
+# print("mlxtend ", mlxtend.__version__)
 
 #importing dataset
 # Get the directory where this script is located
@@ -35,15 +34,15 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 training_path = os.path.join(script_dir, 'Training.csv')
 disease_dataset_training = pd.read_csv(training_path)
 #checking dataset
-print("Columns in training dataset:", disease_dataset_training.columns.tolist())
-print("Dataset shape:", disease_dataset_training.shape)
-disease_dataset_training.head()
+# print("Columns in training dataset:", disease_dataset_training.columns.tolist())
+# print("Dataset shape:", disease_dataset_training.shape)
+# disease_dataset_training.head()
 
 train_data = disease_dataset_training.copy()
 # Remove any unnamed columns that might exist
 unnamed_cols = [col for col in train_data.columns if 'Unnamed' in col]
 if unnamed_cols:
-    print(f"Dropping unnamed columns: {unnamed_cols}")
+    # print(f"Dropping unnamed columns: {unnamed_cols}")
     train_data = train_data.drop(unnamed_cols, axis=1)
 train_data.isnull().sum()
 
@@ -52,10 +51,10 @@ copy = train_data.copy()
 copy = copy.drop(['prognosis'], axis=1)
 
 # correlation check
-plt.style.use('fivethirtyeight')
-plt.figure(figsize=(150,150))
-sns.heatmap(copy.corr(), annot=True, fmt=".2f", cmap='viridis')
-plt.show()
+# plt.style.use('fivethirtyeight')
+# plt.figure(figsize=(150,150))
+# sns.heatmap(copy.corr(), annot=True, fmt=".2f", cmap='viridis')
+# plt.show()
 
 x_train = train_data.drop(['prognosis'], axis = 1)
 y_train = train_data['prognosis']
@@ -66,7 +65,7 @@ scale.fit(x_train)
 # importing testing dataset 
 testing_path = os.path.join(script_dir, 'Testing.csv')
 test_data = pd.read_csv(testing_path)
-test_data.head()
+# test_data.head()
 
 x_test = test_data.drop(['prognosis'], axis=1)
 y_test = test_data['prognosis']
@@ -83,18 +82,70 @@ grid_clf_knn.fit(x_train,y_train)
 model_knn = grid_clf_knn.best_estimator_
 y_pred_knn = model_knn.predict(x_test)
 
-cm_knn = confusion_matrix(y_test, y_pred_knn)
-print('Confusion matrix for model ' f'{model_knn} : \n', cm_knn)
-ac_knn = accuracy_score(y_test, y_pred_knn)
-print("Accuracy score for model" f'{model_knn} : ', ac_knn)
-cr_knn = classification_report(y_test, y_pred_knn)
-print("classification_report for mofel" f'{model_knn}: \n', cr_knn)
+# cm_knn = confusion_matrix(y_test, y_pred_knn)
+# print('Confusion matrix for model ' f'{model_knn} : \n', cm_knn)
+# ac_knn = accuracy_score(y_test, y_pred_knn)
+# print("Accuracy score for model" f'{model_knn} : ', ac_knn)
+# cr_knn = classification_report(y_test, y_pred_knn)
+# print("classification_report for mofel" f'{model_knn}: \n', cr_knn)
 
-cm_knn = confusion_matrix(y_test, y_pred_knn)
-fig, ax = plot_confusion_matrix(conf_mat = cm_knn, show_absolute = True, colorbar = True, cmap = 'Wistia', figsize=(12,12))
-plt.title("CM for Diseases Model")
+# cm_knn = confusion_matrix(y_test, y_pred_knn)
+# fig, ax = plot_confusion_matrix(conf_mat = cm_knn, show_absolute = True, colorbar = True, cmap = 'Wistia', figsize=(12,12))
+# plt.title("CM for Diseases Model")
 # plt.show()
 
 print(model_knn.score(x_train, y_train))
 
 print(model_knn.score(x_test, y_test))
+
+# Function to make predictions with symptom array
+def predict_disease(symptoms_array, model=model_knn):
+    """
+    Predict disease based on symptoms array
+    
+    Parameters:
+    symptoms_array: list or array of 0s and 1s with length 132
+                   Each position corresponds to a symptom (1 = present, 0 = absent)
+    model: trained model to use for prediction (default: model_knn)
+    
+    Returns:
+    predicted_disease: string with the predicted disease name
+    """
+    if len(symptoms_array) != len(x_train.columns):
+        raise ValueError(f"Symptoms array must have length {len(x_train.columns)}, got {len(symptoms_array)}")
+    
+    # Convert to numpy array and reshape for prediction
+    symptoms_array = np.array(symptoms_array).reshape(1, -1)
+    
+    # Make prediction
+    prediction = model.predict(symptoms_array)
+    
+    return prediction[0]
+
+# Function to get symptom names (feature names)
+def get_symptom_names():
+    """
+    Get the list of all symptom names in order
+    
+    Returns:
+    list of symptom names corresponding to each position in the input array
+    """
+    return x_train.columns.tolist()
+
+# Example usage:
+print("\n" + "="*50)
+print("PREDICTION FUNCTIONS READY")
+print("="*50)
+print(f"Number of symptoms/features: {len(x_train.columns)}")
+print(f"First 10 symptoms: {get_symptom_names()[:10]}")
+print("\nTo make a prediction:")
+print("1. Create an array of 0s and 1s with length", len(x_train.columns))
+print("2. Call predict_disease(your_array)")
+print("\nExample:")
+print("# Create array with all symptoms absent (0) except first symptom present (1)")
+example_symptoms = [0] * len(x_train.columns)
+example_symptoms[0] = 1  # Set first symptom as present
+predicted = predict_disease(example_symptoms)
+print(f"example_symptoms = [1, 0, 0, ...] (length {len(x_train.columns)})")
+print(f"prediction = predict_disease(example_symptoms)")
+print(f"Result: '{predicted}'")
