@@ -1,6 +1,6 @@
 # 🩺 CuraCheck - AI-Powered Health Diagnosis System
 
-DEPLOYMENT LINK: https://curacheck.onrender.com/
+LIVE LINK: https://curacheck.onrender.com/
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python">
