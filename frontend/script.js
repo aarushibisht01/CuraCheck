@@ -154,6 +154,39 @@ function showQuestion(index) {
         if (selected) selected.checked = true;
     }
     submitBtn.style.display = index === questions.length - 1 ? "inline-block" : "none";
+    
+    // Add auto-advance functionality
+    addAutoAdvanceListeners();
+}
+
+function addAutoAdvanceListeners() {
+    const radioButtons = document.querySelectorAll('input[name="answer"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Small delay to show selection visually
+            setTimeout(() => {
+                autoAdvanceToNext();
+            }, 300);
+        });
+    });
+}
+
+function autoAdvanceToNext() {
+    const selected = document.querySelector('input[name="answer"]:checked');
+    if (!selected) return;
+    
+    // Save the current answer
+    answers[currentQuestion] = parseInt(selected.value);
+    
+    // Move to next question or submit if last question
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+    } else {
+        // If it's the last question, the submit button is already visible
+        // User can click submit when ready
+        console.log("All questions answered. Ready to submit.");
+    }
 }
 
 function nextQuestion() {
@@ -284,7 +317,7 @@ function resetForm() {
             <div class="buttons">
                 <button type="button" class="nav-btn" onclick="prevQuestion()">⏮ Previous</button>
                 <button type="button" class="nav-btn" onclick="nextQuestion()">Next ⏭</button>
-                <button type="submit" id="submitBtn" style="display:none;">✅ Submit</button>
+                <button type="submit" id="submitBtn" style="display:none;">Submit</button>
             </div>
         </form>
     `;

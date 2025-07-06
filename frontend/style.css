@@ -140,12 +140,42 @@ body {
     font-weight: bold;
     width: 100%;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     height: 100px;
+    border: 2px solid transparent;
 }
 
 .radio-option-vertical:hover {
     background-color: #b2dfdb;
+    transform: translateY(-2px);
+}
+
+.radio-option-vertical input[type="radio"]:checked + span {
+    color: #00796b;
+}
+
+.radio-option-vertical:has(input[type="radio"]:checked) {
+    background-color: #4caf50;
+    color: white;
+    border-color: #00796b;
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    animation: selectionPulse 0.3s ease-out;
+}
+
+@keyframes selectionPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    }
+    100% {
+        transform: scale(1.02);
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
 }
 
 .radio-option-vertical input[type="radio"] {
@@ -186,6 +216,25 @@ body {
 
 .buttons .nav-btn:last-child {
     margin-left: 10px;
+}
+
+/* All buttons (including submit) have consistent styling */
+#submitBtn {
+    background-color: #00796b !important;
+    color: white !important;
+    flex: 1;
+    padding: 15px 0 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+#submitBtn:hover {
+    background-color: #004d40 !important;
 }
 
 .cards-section {
@@ -275,6 +324,58 @@ body {
     gap: 15px;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+/* Make result action buttons more eye-catching */
+.result-actions .nav-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    padding: 18px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    transform: translateY(0);
+}
+
+.result-actions .nav-btn:hover {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.result-actions .nav-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* Special styling for specific buttons */
+.result-actions .nav-btn:first-child {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    box-shadow: 0 6px 20px rgba(33, 150, 243, 0.3);
+}
+
+.result-actions .nav-btn:first-child:hover {
+    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+    box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+}
+
+.result-actions .nav-btn:last-child {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
+}
+
+.result-actions .nav-btn:last-child:hover {
+    background: linear-gradient(135deg, #F57C00 0%, #EF6C00 100%);
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
 }
 
 .disclaimer {
