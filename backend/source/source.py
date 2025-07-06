@@ -1,3 +1,4 @@
+
 # importing libraries 
 
 import numpy as np
@@ -97,55 +98,3 @@ y_pred_knn = model_knn.predict(x_test)
 print(model_knn.score(x_train, y_train))
 
 print(model_knn.score(x_test, y_test))
-
-# Function to make predictions with symptom array
-def predict_disease(symptoms_array, model=model_knn):
-    """
-    Predict disease based on symptoms array
-    
-    Parameters:
-    symptoms_array: list or array of 0s and 1s with length 132
-                   Each position corresponds to a symptom (1 = present, 0 = absent)
-    model: trained model to use for prediction (default: model_knn)
-    
-    Returns:
-    predicted_disease: string with the predicted disease name
-    """
-    if len(symptoms_array) != len(x_train.columns):
-        raise ValueError(f"Symptoms array must have length {len(x_train.columns)}, got {len(symptoms_array)}")
-    
-    # Convert to numpy array and reshape for prediction
-    symptoms_array = np.array(symptoms_array).reshape(1, -1)
-    
-    # Make prediction
-    prediction = model.predict(symptoms_array)
-    
-    return prediction[0]
-
-# Function to get symptom names (feature names)
-def get_symptom_names():
-    """
-    Get the list of all symptom names in order
-    
-    Returns:
-    list of symptom names corresponding to each position in the input array
-    """
-    return x_train.columns.tolist()
-
-# Example usage:
-print("\n" + "="*50)
-print("PREDICTION FUNCTIONS READY")
-print("="*50)
-print(f"Number of symptoms/features: {len(x_train.columns)}")
-print(f"First 10 symptoms: {get_symptom_names()[:10]}")
-print("\nTo make a prediction:")
-print("1. Create an array of 0s and 1s with length", len(x_train.columns))
-print("2. Call predict_disease(your_array)")
-print("\nExample:")
-print("# Create array with all symptoms absent (0) except first symptom present (1)")
-example_symptoms = [0] * len(x_train.columns)
-example_symptoms[0] = 1  # Set first symptom as present
-predicted = predict_disease(example_symptoms)
-print(f"example_symptoms = [1, 0, 0, ...] (length {len(x_train.columns)})")
-print(f"prediction = predict_disease(example_symptoms)")
-print(f"Result: '{predicted}'")
