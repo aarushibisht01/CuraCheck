@@ -1,84 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CuraCheck - All-in-One</title>
-  <link rel="stylesheet" href="style.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CuraCheck - All-in-One</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <header>
-    <nav class="navbar">
-      <div class="logo">CuraCheck</div>
-      <ul class="nav-links">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#checker">Symptom Checker</a></li>
-        <li><a href="#tips">Health Tips</a></li>
-      </ul>
-    </nav>
-  </header>
-
-
-  <section class="hero-section" id="home">
-    <div class="overlay">
-      <h1>CuraCheck</h1>
-      <p>Your smart health companion for early diagnosis</p>
-      <a href="#checker" class="hero-btn" onclick="smoothScrollToChecker()">Start Diagnosis</a>
-    </div>
-  </section>
- 
- <section class="form-section" id="checker">
-  <div class="container form-card">
-    <h2>🩺 Symptom Checker</h2>
-    <p id="question" class="question-text">Do you have a fever?</p>
-    <form id="healthForm">
-<div class="radio-buttons-vertical">
-  <label class="radio-option-vertical">
-    <input type="radio" name="answer" value="1" />
-    <span>Yes</span>
-  </label>
-  <label class="radio-option-vertical">
-    <input type="radio" name="answer" value="0" checked />
-    <span>No</span>
-  </label>
-</div>
-
-      <div class="buttons">
-        <button type="button" onclick="prevQuestion()">⏮ Previous</button>
-        <button type="button" onclick="nextQuestion()">Next ⏭</button>
-        <button type="submit" id="submitBtn" style="display:none;">✅ Submit</button>
-      </div>
-    </form>
-  </div>
-</section>
-
-  <section class="cards-section" id="tips">
-    <h2>Healthy Living Tips</h2>
-    <div class="cards-wrapper">
-      <div class="card">
-        <img src="images/tips-1.jpg" alt="Drink Water"/>
-        <div class="card-text">
-          <h3>Stay Hydrated</h3>
-          <p>Drink at least 8 glasses of water daily to keep your body fresh and improve skin health.</p>
+    <header>
+        <nav class="navbar">
+        <div class="logo">CuraCheck</div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active" onclick="delayedScrollTo('home'); return false;">Home</a></li>
+            <li><a href="#checker" onclick="delayedScrollTo('checker'); return false;">Symptom Checker</a></li>
+            <li><a href="#tips" onclick="delayedScrollTo('tips'); return false;">Health Tips</a></li>
+        </ul>
+        </nav>
+    </header>
+    <section class="hero-section" id="home">
+        <div class="overlay">
+            <h1>CuraCheck</h1>
+            <p>Your smart health companion for early diagnosis</p>
+            <a href="#checker" class="hero-btn" onclick="delayedScrollTo('checker'); return false;">Start Diagnosis</a>
         </div>
-      </div>
-      <div class="card">
-        <img src="images/tips-2.jpg" alt="Exercise"/>
-        <div class="card-text">
-          <h3>Move Your Body</h3>
-          <p>30 minutes of daily exercise can significantly reduce your risk of chronic diseases.</p>
+    </section>
+    <section class="form-section" id="checker">
+        <div class="container form-card">
+            <h2>🩺 Symptom Checker</h2>
+            <p id="question" class="question-text">Do you have a fever?</p>
+            <form id="healthForm">
+                <div class="radio-buttons-vertical">
+                    <label class="radio-option-vertical">
+                        <input type="radio" name="answer" value="1" />
+                        <span>Yes</span>
+                    </label>
+                    <label class="radio-option-vertical">
+                        <input type="radio" name="answer" value="0" checked />
+                        <span>No</span>
+                    </label>
+                </div>
+                <div class="buttons">
+                    <button type="button" onclick="prevQuestion()">⏮ Previous</button>
+                    <button type="button" onclick="nextQuestion()">Next ⏭</button>
+                    <button type="submit" id="submitBtn" style="display:none;">✅ Submit</button>
+                </div>
+            </form>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer" id="footer">
-    <div class="footer-content">
-      <p>&copy; 2025 CuraCheck. All rights reserved.</p>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+    </section>
+    <section class="cards-section" id="tips">
+        <h2>Healthy Living Tips</h2>
+        <div class="cards-wrapper">
+            <div class="card">
+                <img src="images/tips-1.jpg" alt="Drink Water"/>
+                <div class="card-text">
+                    <h3>Stay Hydrated</h3>
+                    <p>Drink at least 8 glasses of water daily to keep your body fresh and improve skin health.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images/tips-2.jpg" alt="Exercise"/>
+                <div class="card-text">
+                    <h3>Move Your Body</h3>
+                    <p>30 minutes of daily exercise can significantly reduce your risk of chronic diseases.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+        <p>&copy; 2025 CuraCheck. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
 
 </body>
 </html>

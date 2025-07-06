@@ -144,24 +144,17 @@ function showQuestion(index) {
     questionText.textContent = questions[index];
 
     const inputs = document.querySelectorAll('input[name="answer"]');
-
     
     inputs.forEach(input => {
         input.checked = false;
     });
 
-   
     if (answers[index] !== undefined) {
         const selected = document.querySelector(`input[name="answer"][value="${answers[index]}"]`);
         if (selected) selected.checked = true;
     }
-
-  
     submitBtn.style.display = index === questions.length - 1 ? "inline-block" : "none";
 }
-
-
-showQuestion(currentQuestion);
 
 function nextQuestion() {
     const selected = document.querySelector('input[name="answer"]:checked');
@@ -194,9 +187,18 @@ form.addEventListener("submit", function (e) {
     console.log("Submitted Answers:", answers);
     alert("Form submitted! Data logged in console.");
 });
-function smoothScrollToChecker() {
-  const section = document.getElementById("checker");
-  section.scrollIntoView({ behavior: "smooth" });
+
+function smoothScrollToTarget(targetId) {
+
+}
+
+function delayedScrollTo(id) {
+    const target = document.getElementById(id);
+    if (target) {
+        setTimeout(() => {
+            target.scrollIntoView({ behavior: "smooth" });
+        }, 200);
+    }
 }
 
 showQuestion(currentQuestion);
