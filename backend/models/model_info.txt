@@ -1,0 +1,52 @@
+CuraCheck Disease Prediction Model Information
+==================================================
+
+Model Type: KNeighborsClassifier
+Features: 132
+Diseases: 41
+Best Parameters: {'metric': 'euclidean', 'n_neighbors': 1}
+Cross-validation Score: 1.0000
+Training Accuracy: 1.0000
+
+Diseases List:
+ 1. (vertigo) Paroymsal  Positional Vertigo
+ 2. AIDS
+ 3. Acne
+ 4. Alcoholic hepatitis
+ 5. Allergy
+ 6. Arthritis
+ 7. Bronchial Asthma
+ 8. Cervical spondylosis
+ 9. Chicken pox
+10. Chronic cholestasis
+11. Common Cold
+12. Dengue
+13. Diabetes 
+14. Dimorphic hemmorhoids(piles)
+15. Drug Reaction
+16. Fungal infection
+17. GERD
+18. Gastroenteritis
+19. Heart attack
+20. Hepatitis B
+21. Hepatitis C
+22. Hepatitis D
+23. Hepatitis E
+24. Hypertension 
+25. Hyperthyroidism
+26. Hypoglycemia
+27. Hypothyroidism
+28. Impetigo
+29. Jaundice
+30. Malaria
+31. Migraine
+32. Osteoarthristis
+33. Paralysis (brain hemorrhage)
+34. Peptic ulcer diseae
+35. Pneumonia
+36. Psoriasis
+37. Tuberculosis
+38. Typhoid
+39. Urinary tract infection
+40. Varicose veins
+41. hepatitis A

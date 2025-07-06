@@ -1,0 +1,9 @@
+@echo off
+echo Starting CuraCheck Backend API...
+echo.
+echo Installing required packages...
+pip install -r requirements.txt
+echo.
+echo Starting Flask server...
+python app.py
+pause
