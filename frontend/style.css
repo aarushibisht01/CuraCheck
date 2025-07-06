@@ -10,14 +10,12 @@ html {
     scroll-padding-top: 70px;
 }
 
-
 body {
     font-family: 'Segoe UI', sans-serif;
     color: #222;
     line-height: 1.6;
     background-color: #f4f4f4;
 }
-
 
 .navbar {
     background-color: #00796b;
@@ -51,7 +49,6 @@ body {
 .nav-links li a.active {
     color: #c8e6c9;
 }
-
 
 .hero-section {
     background: url("images/bg-img.jpg") no-repeat center center/cover;
@@ -94,7 +91,6 @@ body {
     background-color: #004d40;
 }
 
-
 .form-section {
     min-height: 100vh;
     padding: 60px 20px;
@@ -125,7 +121,6 @@ body {
     font-weight: 600;
     margin-bottom: 30px;
 }
-
 
 .radio-buttons-vertical {
     display: flex;
@@ -159,30 +154,39 @@ body {
     margin-right: 20px;
 }
 
-
 .buttons {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+    width: 100%;
 }
 
-.buttons button {
-    padding: 12px 24px;
+.buttons .nav-btn {
+    flex: 1;
+    padding: 15px 0;
     background-color: #00796b;
     color: white;
     border: none;
     border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.buttons button:hover {
+.buttons .nav-btn:hover {
     background-color: #004d40;
 }
 
+.buttons .nav-btn:first-child {
+    margin-right: 10px;
+}
+
+.buttons .nav-btn:last-child {
+    margin-left: 10px;
+}
 
 .cards-section {
     min-height: 100vh;
@@ -224,7 +228,6 @@ body {
     color: #00796b;
     margin-bottom: 10px;
 }
-
 
 .footer {
     background-color: #00796b;
